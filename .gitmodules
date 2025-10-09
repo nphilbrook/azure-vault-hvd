@@ -1,3 +1,0 @@
-[submodule "prereqs/terraform-acme-tls-azurerm"]
-	path = prereqs/terraform-acme-tls-azurerm
-	url = git@github.com:hashicorp-services/terraform-acme-tls-azurerm.git
