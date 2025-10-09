@@ -38,7 +38,8 @@ variable "az_client_secret" {
   type        = string
   description = "Azure Client Secret"
   sensitive   = true
-  ephemeral   = true
+  # won't work with acme provider
+  # ephemeral   = true
 }
 
 variable "cert_email" {
