@@ -8,6 +8,11 @@ component "prereqs" {
     cert_email          = var.cert_email
     zone_name           = var.environment_info[each.key].zone
     resource_group_name = var.environment_info[each.key].resource_group_name
+
+    az_subscription_id = var.az_subscription_id
+    az_tenant_id       = var.az_tenant_id
+    az_client_id       = var.az_client_id
+    az_client_secret   = var.az_client_secret
   }
 
   providers = {
