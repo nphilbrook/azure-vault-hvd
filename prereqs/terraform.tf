@@ -17,5 +17,13 @@ terraform {
       source  = "hashicorp/tls"
       version = "~>4.1"
     }
+    tfe = {
+      source  = "hashicorp/tfe"
+      version = "~>0.70"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.7"
+    }
   }
 }

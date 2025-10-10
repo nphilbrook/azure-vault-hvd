@@ -6,8 +6,15 @@ component "prereqs" {
   inputs = {
     default_tags        = var.default_tags
     cert_email          = var.cert_email
-    zone_name           = var.environment_info[each.key].zone
+    dns_zone_name       = var.environment_info[each.key].zone
     resource_group_name = var.environment_info[each.key].resource_group_name
+    location            = each.key
+    default_tags        = var.default_tags
+    environment         = var.environment
+    vnet_cidr           = var.vnet_cidrs[each.key]
+    subnet_cidrs        = var.subnet_cidrs[each.key]
+    ingress_ips         = var.ingress_ips
+    kv_vault_license    = var.kv_vault_license
 
     az_subscription_id = var.az_subscription_id
     az_tenant_id       = var.az_tenant_id
@@ -18,9 +25,11 @@ component "prereqs" {
   providers = {
     azurerm = provider.azurerm.this
     # aws     = provider.aws.this
-    acme  = provider.acme.this
-    local = provider.local.this
-    tls   = provider.tls.this
+    acme   = provider.acme.this
+    local  = provider.local.this
+    tls    = provider.tls.this
+    tfe    = provider.tfe.this
+    random = provider.random.this
   }
 }
 

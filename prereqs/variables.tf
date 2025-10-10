@@ -1,4 +1,16 @@
-variable "zone_name" {
+variable "default_tags" {
+  type = map(string)
+}
+
+variable "environment" {
+  type = string
+}
+
+variable "location" {
+  type = string
+}
+
+variable "dns_zone_name" {
   type = string
 }
 
@@ -29,4 +41,21 @@ variable "az_client_secret" {
   type        = string
   description = "Azure Client Secret"
   sensitive   = true
+}
+
+variable "vnet_cidr" {
+  type = string
+}
+
+variable "subnet_cidrs" {
+  type = map(string)
+}
+
+variable "ingress_ips" {
+  type = list(string)
+}
+
+variable "kv_vault_license" {
+  type      = string
+  sensitive = true
 }

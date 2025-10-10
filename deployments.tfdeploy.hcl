@@ -18,6 +18,11 @@ store "varset" "azure_auth" {
   category = "env"
 }
 
+store "varset" "azure_config" {
+  name     = "Azure Config"
+  category = "terraform"
+}
+
 deployment "dev" {
   inputs = {
     locations          = ["eastus"]
@@ -27,7 +32,22 @@ deployment "dev" {
     az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
     az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
     az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
+    tfe_token          = store.varset.azure_auth.tfe_token
     environment_info   = upstream_input.env_info.dev_environment_info
+    vnet_cidrs = {
+      eastus = "10.128.0.0/22"
+    }
+    subnet_cidrs = {
+      eastus = {
+        bastion = "10.128.0.0/24"
+        lb      = "10.128.1.0/24"
+        vault   = "10.128.2.0/24"
+        # reserved for future use :D
+        # app = "10.128.3.0/24"
+      }
+    }
+    ingress_ips      = store.varset.azure_config.stable.ingress_ips
+    kv_vault_license = store.varset.azure_auth.stable.vault_license
   }
 }
 
@@ -40,6 +60,21 @@ deployment "prod" {
     az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
     az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
     az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
+    tfe_token          = store.varset.azure_auth.tfe_token
     environment_info   = upstream_input.env_info.prod_environment_info
+    vnet_cidrs = {
+      eastus = "10.128.128.0/22"
+    }
+    subnet_cidrs = {
+      eastus = {
+        bastion = "10.128.128.0/24"
+        lb      = "10.128.129.0/24"
+        vault   = "10.128.130.0/24"
+        # reserved for future use :D
+        # app = "10.128.131.0/24"
+      }
+    }
+    ingress_ips      = store.varset.azure_config.stable.ingress_ips
+    kv_vault_license = store.varset.azure_auth.stable.vault_license
   }
 }

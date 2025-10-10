@@ -54,3 +54,26 @@ variable "environment_info" {
     zone                = string
   }))
 }
+
+variable "vnet_cidrs" {
+  type = map(string)
+}
+
+variable "subnet_cidrs" {
+  type = map(map(string))
+}
+
+variable "ingress_ips" {
+  type = list(string)
+}
+
+variable "kv_vault_license" {
+  type      = string
+  sensitive = true
+}
+
+variable "tfe_token" {
+  type      = string
+  sensitive = true
+  ephemeral = true
+}

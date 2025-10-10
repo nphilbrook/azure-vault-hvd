@@ -19,6 +19,14 @@ required_providers {
     source  = "hashicorp/tls"
     version = "~>4.1"
   }
+  tfe = {
+    source  = "hashicorp/tfe"
+    version = "~>0.70"
+  }
+  random = {
+    source  = "hashicorp/random"
+    version = "~>3.7"
+  }
 }
 
 provider "azurerm" "this" {
@@ -68,3 +76,13 @@ provider "tls" "this" {
   config {}
 }
 
+provider "random" "this" {
+  config {}
+}
+
+provider "tfe" "this" {
+  config {
+    organization = "philbrook"
+    token        = var.tfe_token
+  }
+}
