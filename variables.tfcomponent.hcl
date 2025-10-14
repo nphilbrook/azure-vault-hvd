@@ -77,3 +77,7 @@ variable "tfe_token" {
   sensitive = true
   ephemeral = true
 }
+
+variable "ssh_public_key" {
+  type = string
+}

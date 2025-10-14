@@ -32,7 +32,7 @@ deployment "dev" {
     az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
     az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
     az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
-    tfe_token          = store.varset.azure_auth.tfe_token
+    tfe_token          = store.varset.azure_auth.TFE_TOKEN
     environment_info   = upstream_input.env_info.dev_environment_info
     vnet_cidrs = {
       eastus = "10.128.0.0/22"
@@ -48,6 +48,7 @@ deployment "dev" {
     }
     ingress_ips      = store.varset.azure_config.stable.ingress_ips
     kv_vault_license = store.varset.azure_auth.stable.vault_license
+    ssh_public_key   = store.varset.azure_config.stable.ssh_public_key
   }
 }
 
@@ -60,7 +61,7 @@ deployment "prod" {
     az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
     az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
     az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
-    tfe_token          = store.varset.azure_auth.tfe_token
+    tfe_token          = store.varset.azure_auth.TFE_TOKEN
     environment_info   = upstream_input.env_info.prod_environment_info
     vnet_cidrs = {
       eastus = "10.128.128.0/22"
@@ -76,5 +77,6 @@ deployment "prod" {
     }
     ingress_ips      = store.varset.azure_config.stable.ingress_ips
     kv_vault_license = store.varset.azure_auth.stable.vault_license
+    ssh_public_key   = store.varset.azure_config.stable.ssh_public_key
   }
 }

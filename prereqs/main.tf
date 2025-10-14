@@ -17,23 +17,25 @@ module "vault_prereqs" {
   private_dns_zone_name = var.dns_zone_name
 
   # --- Networking --- #
-  create_vnet                    = true
-  create_nat_gateway             = true
-  create_nsg_nat_rule            = true
-  create_bastion                 = true
-  vnet_cidr                      = [var.vnet_cidr]
-  bastion_subnet_cidr            = var.subnet_cidrs["bastion"]
-  lb_subnet_cidr                 = var.subnet_cidrs["lb"]
-  vault_subnet_cidr              = var.subnet_cidrs["vault"]
+  create_vnet         = true
+  create_nat_gateway  = true
+  create_nsg_nat_rule = true
+  create_bastion      = true
+  vnet_cidr           = [var.vnet_cidr]
+  bastion_subnet_cidr = var.subnet_cidrs["bastion"]
+  lb_subnet_cidr      = var.subnet_cidrs["lb"]
+  vault_subnet_cidr   = var.subnet_cidrs["vault"]
+  # getting these ingress IPs from 2 different places to
+  # test a theory - it can be done either way, but the TFE
+  # provider does need to be specifically auth'd with a token
+  # (no magic token for stacks like there is for workspaces)
   cidr_allow_ingress_bastion_ssh = var.ingress_ips
   cidr_allow_ingress_lb_443      = data.tfe_outputs.azure_hcp_control_outputs.nonsensitive_values.ingress_ips
   cidr_ingress_lb_allow_8200     = var.ingress_ips
   cidr_ingress_vault_allow_8200  = data.tfe_outputs.azure_hcp_control_outputs.nonsensitive_values.ingress_ips
   key_vault_cidr_allow_ingress   = [] # do I need this?
   # TODO plumb this through like the ingress IPs
-  bastion_ssh_public_key = <<EOF
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC48Ys2HvlHglzLbwdfxt9iK2LATImoH8VG9vWzvuiRIsa8UQxbLbk6Gutx3MpB2FZywB3ZrZfw5MqivAtJXE2Os/QmgAZQxRpV15BTzrgvbqTKyibKnmRsCG59O8icftREKY6q/gvzr67QcMhMEZLDExS8c+zycQT1xCVg1ip5PwPAwMQRxtqLvV/5B85IsJuMZi3YymYaVSJgayYBA2eM/M8YInlIDKNqekHL/cUZFG2TP98NOODsY4kRyos4c8+jkULLCOGu0rLhA7rP3NsvEbcpCOI2lS5XgxnOHIpZ42V2xGId8IRDtK4wEGAHEWmOKdOsL4Qe5AwglHMmdkZU2HKdThOb5+8pf5BDe/I9aLB3k7vW5jcOm1dyHZ0pg/Tg9hJdFCCSBm0E4EJDRzI223chgwjf+XrMDB7DHTa29KU63rDeQme89y57HkgxXCIq4EVUKRaJS1PIUI7uJKMDryd2Au/W9z4nAbindFIxHMg/eC1aW0k90ri8FebvkX0=
-EOF
+  bastion_ssh_public_key = var.ssh_public_key
 
   # --- Key Vault "Bootstrap" Secrets --- #
   create_key_vault          = true

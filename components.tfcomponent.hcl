@@ -15,6 +15,7 @@ component "prereqs" {
     subnet_cidrs        = var.subnet_cidrs[each.key]
     ingress_ips         = var.ingress_ips
     kv_vault_license    = var.kv_vault_license
+    ssh_public_key      = var.ssh_public_key
 
     az_subscription_id = var.az_subscription_id
     az_tenant_id       = var.az_tenant_id
