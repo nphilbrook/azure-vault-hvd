@@ -34,8 +34,10 @@ module "vault_prereqs" {
   cidr_ingress_lb_allow_8200     = var.ingress_ips
   cidr_ingress_vault_allow_8200  = data.tfe_outputs.azure_hcp_control_outputs.nonsensitive_values.ingress_ips
   key_vault_cidr_allow_ingress   = [] # do I need this?
-  # TODO plumb this through like the ingress IPs
+
+  # Bastion
   bastion_ssh_public_key = var.ssh_public_key
+  bastion_size           = "Standard_A1_v2"
 
   # --- Key Vault "Bootstrap" Secrets --- #
   create_key_vault          = true
