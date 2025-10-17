@@ -33,7 +33,12 @@ module "vault_prereqs" {
   cidr_allow_ingress_lb_443      = data.tfe_outputs.azure_hcp_control_outputs.nonsensitive_values.ingress_ips
   cidr_ingress_lb_allow_8200     = var.ingress_ips
   cidr_ingress_vault_allow_8200  = data.tfe_outputs.azure_hcp_control_outputs.nonsensitive_values.ingress_ips
-  key_vault_cidr_allow_ingress   = [] # do I need this?
+
+  # Taking a Zero-Trust posture here, since I'm using HCPt's global agent pool
+  # To lock this down, would need to run HCPt agents somewhere and allow-list those IPs
+  # in the 2nd variable
+  network_default_action       = "Allow"
+  key_vault_cidr_allow_ingress = [] # do I need this?
 
   # Bastion
   bastion_ssh_public_key = var.ssh_public_key
