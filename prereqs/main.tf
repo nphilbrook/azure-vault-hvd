@@ -1,6 +1,6 @@
 module "vault_prereqs" {
   source  = "app.terraform.io/philbrook/prereqs/azurerm"
-  version = "0.0.2"
+  version = "0.0.3"
 
   # --- Common --- #
   friendly_name_prefix  = var.environment
