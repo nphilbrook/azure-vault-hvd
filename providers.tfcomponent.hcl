@@ -33,7 +33,7 @@ provider "azurerm" "this" {
   config {
     use_cli                         = false
     resource_provider_registrations = "none"
-    resource_providers_to_register  = "Microsoft.KeyVault"
+    resource_providers_to_register  = ["Microsoft.KeyVault"]
 
     tenant_id       = var.az_tenant_id
     subscription_id = var.az_subscription_id
