@@ -25,7 +25,7 @@ store "varset" "azure_config" {
 
 deployment "dev" {
   inputs = {
-    locations          = [""]
+    locations          = []
     removed_locations  = ["eastus"]
     environment        = "dev"
     default_tags       = local.default_tags
@@ -55,7 +55,7 @@ deployment "dev" {
 
 deployment "prod" {
   inputs = {
-    locations          = [""]
+    locations          = []
     removed_locations  = ["eastus"]
     environment        = "prod"
     default_tags       = local.default_tags
