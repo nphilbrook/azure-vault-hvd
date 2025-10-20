@@ -81,3 +81,8 @@ variable "tfe_token" {
 variable "ssh_public_key" {
   type = string
 }
+
+variable "vault_vms_count" {
+  type    = number
+  default = 3
+}

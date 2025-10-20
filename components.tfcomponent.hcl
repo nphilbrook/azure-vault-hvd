@@ -74,8 +74,8 @@ component "vault_hvd" {
     # Compute
     #------------------------------------------------------------------------------
     vm_ssh_public_key = var.ssh_public_key
-    vmss_vm_count     = 3
-    vm_sku            = "Standard_D2s_v5"
+    vmss_vm_count     = var.vault_vms_count
+    vm_sku            = "Standard_B2s"
   }
 
   providers = {

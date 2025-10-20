@@ -78,5 +78,6 @@ deployment "prod" {
     ingress_ips      = store.varset.azure_config.stable.ingress_ips
     kv_vault_license = store.varset.azure_auth.stable.vault_license
     ssh_public_key   = store.varset.azure_config.stable.ssh_public_key
+    vault_vms_count  = 5
   }
 }
