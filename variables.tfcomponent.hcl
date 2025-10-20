@@ -2,6 +2,10 @@ variable "locations" {
   type = set(string)
 }
 
+variable "removed_locations" {
+  type = set(string)
+}
+
 variable "default_tags" {
   description = "A map of default tags to apply to all AWS resources"
   type        = map(string)

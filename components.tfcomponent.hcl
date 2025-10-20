@@ -83,24 +83,29 @@ component "vault_hvd" {
   }
 }
 
-# removed {
-#   for_each = var.removed_locations
-#   source   = "./rg"
-#   from     = component.rg[each.value]
+removed {
+  for_each = var.removed_locations
+  source   = "./prereqs"
+  from     = component.prereqs[each.value]
 
-#   providers = {
-#     azurerm = provider.azurerm.this
-#   }
-# }
+  providers = {
+    azurerm = provider.azurerm.this
+    acme    = provider.acme.this
+    local   = provider.local.this
+    tls     = provider.tls.this
+    tfe     = provider.tfe.this
+    random  = provider.random.this
+  }
+}
 
 
-# removed {
-#   for_each = var.removed_locations
-#   source   = "./dns_tls"
-#   from     = component.dns_tls[each.value]
+removed {
+  for_each = var.removed_locations
+  source   = "app.terraform.io/philbrook/vault-enterprise-hvd/azurerm"
+  version  = "0.1.1-philbrook"
+  from     = component.vault_hvd[each.value]
 
-#   providers = {
-#     azurerm = provider.azurerm.this
-#     aws     = provider.aws.this
-#   }
-# }
+  providers = {
+    azurerm = provider.azurerm.this
+  }
+}
