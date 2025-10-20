@@ -1,8 +1,16 @@
-variable "locations" {
+variable "prereq_locations" {
   type = set(string)
 }
 
-variable "removed_locations" {
+variable "vault_locations" {
+  type = set(string)
+}
+
+variable "removed_prereq_locations" {
+  type = set(string)
+}
+
+variable "removed_vault_locations" {
   type = set(string)
 }
 

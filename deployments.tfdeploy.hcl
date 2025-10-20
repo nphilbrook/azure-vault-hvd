@@ -25,16 +25,18 @@ store "varset" "azure_config" {
 
 deployment "dev" {
   inputs = {
-    locations          = []
-    removed_locations  = ["eastus"]
-    environment        = "dev"
-    default_tags       = local.default_tags
-    az_tenant_id       = store.varset.azure_auth.stable.ARM_TENANT_ID
-    az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
-    az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
-    az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
-    tfe_token          = store.varset.azure_auth.TFE_TOKEN
-    environment_info   = upstream_input.env_info.dev_environment_info
+    prereq_locations         = ["eastus"]
+    removed_prereq_locations = []
+    vault_locations          = []
+    removed_vault_locations  = ["eastus"]
+    environment              = "dev"
+    default_tags             = local.default_tags
+    az_tenant_id             = store.varset.azure_auth.stable.ARM_TENANT_ID
+    az_subscription_id       = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
+    az_client_id             = store.varset.azure_auth.stable.ARM_CLIENT_ID
+    az_client_secret         = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
+    tfe_token                = store.varset.azure_auth.TFE_TOKEN
+    environment_info         = upstream_input.env_info.dev_environment_info
     vnet_cidrs = {
       eastus = "10.128.0.0/22"
     }
@@ -55,16 +57,18 @@ deployment "dev" {
 
 deployment "prod" {
   inputs = {
-    locations          = []
-    removed_locations  = ["eastus"]
-    environment        = "prod"
-    default_tags       = local.default_tags
-    az_tenant_id       = store.varset.azure_auth.stable.ARM_TENANT_ID
-    az_subscription_id = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
-    az_client_id       = store.varset.azure_auth.stable.ARM_CLIENT_ID
-    az_client_secret   = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
-    tfe_token          = store.varset.azure_auth.TFE_TOKEN
-    environment_info   = upstream_input.env_info.prod_environment_info
+    prereq_locations         = ["eastus"]
+    removed_prereq_locations = []
+    vault_locations          = []
+    removed_vault_locations  = ["eastus"]
+    environment              = "prod"
+    default_tags             = local.default_tags
+    az_tenant_id             = store.varset.azure_auth.stable.ARM_TENANT_ID
+    az_subscription_id       = store.varset.azure_auth.stable.ARM_SUBSCRIPTION_ID
+    az_client_id             = store.varset.azure_auth.stable.ARM_CLIENT_ID
+    az_client_secret         = store.varset.azure_auth.stable.ARM_CLIENT_SECRET
+    tfe_token                = store.varset.azure_auth.TFE_TOKEN
+    environment_info         = upstream_input.env_info.prod_environment_info
     vnet_cidrs = {
       eastus = "10.128.128.0/22"
     }

@@ -1,5 +1,5 @@
 component "prereqs" {
-  for_each = var.locations
+  for_each = var.prereq_locations
 
   source = "./prereqs"
 
@@ -35,7 +35,7 @@ component "prereqs" {
 
 
 component "vault_hvd" {
-  for_each = var.locations
+  for_each = var.vault_locations
 
   source  = "app.terraform.io/philbrook/vault-enterprise-hvd/azurerm"
   version = "0.1.1-philbrook"
@@ -84,7 +84,7 @@ component "vault_hvd" {
 }
 
 removed {
-  for_each = var.removed_locations
+  for_each = var.removed_prereq_locations
   source   = "./prereqs"
   from     = component.prereqs[each.value]
 
@@ -100,7 +100,7 @@ removed {
 
 
 removed {
-  for_each = var.removed_locations
+  for_each = var.removed_vault_locations
   source   = "app.terraform.io/philbrook/vault-enterprise-hvd/azurerm"
   version  = "0.1.1-philbrook"
   from     = component.vault_hvd[each.value]
